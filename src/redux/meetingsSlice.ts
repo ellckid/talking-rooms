@@ -2,7 +2,6 @@ import { createSelector, createSlice, EntityState } from "@reduxjs/toolkit";
 import { meetingsAdapter } from "./adapters.ts";
 import { Meeting, MeetingId } from "./Meeting.ts";
 import { fetchMeetings } from "./thunks.ts";
-import { RootState } from "./store.ts";
 
 type StatusType = "error" | "loading" | "fulfilled";
 
@@ -16,7 +15,7 @@ const initialState: MeetingsState = {
 };
 
 export const meetingsSlice = createSlice({
-  name: "meeting",
+  name: "meetings",
   initialState: initialState,
   reducers: {},
   extraReducers: (builder) => {
@@ -40,7 +39,7 @@ export const meetingsSlice = createSlice({
 export const { selectors: meetingsSelectors } = meetingsSlice;
 
 export const meetingsAdapterSelectors = meetingsAdapter.getSelectors(
-  (state: RootState) => meetingsSelectors.meetings(state),
+  meetingsSelectors.meetings,
 );
 
 export const selectMeetingsByRoom = createSelector(

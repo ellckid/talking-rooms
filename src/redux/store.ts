@@ -3,7 +3,7 @@ import { meetingsSlice } from "./meetingsSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 
 const rootReducer = combineReducers({
-  meetingsReducer: meetingsSlice.reducer,
+  meetings: meetingsSlice.reducer,
 });
 
 export const store = configureStore({
