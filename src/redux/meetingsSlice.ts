@@ -2,6 +2,7 @@ import { createSelector, createSlice, EntityState } from "@reduxjs/toolkit";
 import { meetingsAdapter } from "./adapters.ts";
 import { Meeting, MeetingId } from "./Meeting.ts";
 import { fetchMeetings } from "./thunks.ts";
+import { RootState } from "./store.ts";
 
 type StatusType = "error" | "loading" | "fulfilled";
 
@@ -39,7 +40,16 @@ export const meetingsSlice = createSlice({
 export const { selectors: meetingsSelectors } = meetingsSlice;
 
 export const meetingsAdapterSelectors = meetingsAdapter.getSelectors(
-  meetingsSelectors.meetings,
+  (state: RootState) => meetingsSelectors.meetings(state),
+);
+
+export const selectMeetingsByRoom = createSelector(
+  [meetingsAdapterSelectors.selectAll, (_, calenderId: number) => calenderId],
+  (meetings, calendarId) => {
+    if (calendarId) {
+      return meetings.filter((meeting) => meeting.calendarId === calendarId);
+    }
+  },
 );
 
 export const meetingById = createSelector(
@@ -55,5 +65,3 @@ export const meetingById = createSelector(
     return undefined;
   },
 );
-
-export const allMeetings = meetingsAdapterSelectors.selectAll;

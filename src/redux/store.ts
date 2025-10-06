@@ -1,9 +1,13 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { meetingsSlice } from "./meetingsSlice.ts";
 import { useDispatch, useSelector } from "react-redux";
 
+const rootReducer = combineReducers({
+  meetingsReducer: meetingsSlice.reducer,
+});
+
 export const store = configureStore({
-  reducer: meetingsSlice.reducer,
+  reducer: rootReducer,
 });
 
 export type AppStore = typeof store;
