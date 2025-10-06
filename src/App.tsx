@@ -1,5 +1,7 @@
+import { MeetingPage } from "./pages/MeetingPage.tsx";
+
 const App = () => {
-  return <h1>hello</h1>;
+  return <MeetingPage />;
 };
 
 export default App;
