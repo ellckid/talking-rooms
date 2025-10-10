@@ -42,19 +42,33 @@ export const meetingsAdapterSelectors = meetingsAdapter.getSelectors(
   meetingsSelectors.meetings,
 );
 
-export const selectMeetingsByRoom = createSelector(
-  [meetingsAdapterSelectors.selectAll, (_, calenderId: number) => calenderId],
+export const selectMeetingsIdsByRoom = createSelector(
+  [
+    meetingsAdapterSelectors.selectAll,
+    (_, calenderId: number | null) => calenderId,
+  ],
   (meetings, calendarId) => {
     if (calendarId) {
-      return meetings.filter((meeting) => meeting.calendarId === calendarId);
+      return meetings
+        .filter((meeting) => meeting.calendarId === calendarId)
+        .map((meeting) => meeting.meetingId);
     }
+
+    return meetings.map((meeting) => meeting.meetingId);
   },
 );
 
-export const meetingById = createSelector(
+// export const selectAllIds = createSelector(
+//   [meetingsAdapterSelectors.selectIds],
+//   (meetingIds) => {
+//     return meetingIds;
+//   },
+// );
+
+export const selectMeetingById = createSelector(
   [
     meetingsAdapterSelectors.selectById,
-    (_, meetingId: MeetingId | undefined) => meetingId,
+    (_, meetingId: string | undefined) => meetingId,
   ],
   (meeting, meetingId) => {
     if (meetingId) {

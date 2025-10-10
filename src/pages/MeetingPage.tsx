@@ -3,7 +3,8 @@ import { AllMeetings } from "../components/AllMeetings.tsx";
 import { useEffect } from "react";
 import { fetchMeetings } from "../redux/thunks.ts";
 import { useAppDispatch, useAppSelector } from "../redux/store.ts";
-import { selectMeetingsByRoom } from "../redux/meetingsSlice.ts";
+import { selectMeetingsIdsByRoom } from "../redux/meetingsSlice.ts";
+import { meetingRoomA, meetingRoomB } from "../data/meetingRoomsIds.ts";
 
 export const MeetingPage = () => {
   const dispatch = useAppDispatch();
@@ -12,15 +13,15 @@ export const MeetingPage = () => {
     dispatch(fetchMeetings());
   }, [dispatch]);
   const calendar = useAppSelector((state) =>
-    selectMeetingsByRoom(state, 14312107),
+    selectMeetingsIdsByRoom(state, meetingRoomA.meetingRoomId),
   );
   console.log(calendar);
 
   return (
     <div>
       <h1>Переговорки</h1>
-      <ConferenceRoom />
-      <ConferenceRoom />
+      <ConferenceRoom meetingRoom={meetingRoomA} />
+      <ConferenceRoom meetingRoom={meetingRoomB} />
       <AllMeetings />
     </div>
   );
