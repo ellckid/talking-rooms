@@ -6,6 +6,8 @@ import { TitleContainer } from "./TitleContainer.tsx";
 import { Title } from "./Title.tsx";
 import { RoomStatus } from "./RoomStatus.tsx";
 import { useIsMeetingOngoingById } from "../../hooks/useIsMeetingOngoing.ts";
+import { Button } from "./Button.tsx";
+import { useState } from "react";
 
 interface ConferenceRoomProps {
   meetingRoom: { meetingRoomId: number; meetingRoomName: string };
@@ -15,6 +17,7 @@ export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
   const meetingIdsByRoom = useAppSelector((state) =>
     selectNextTodayMeetingsIdsByRoom(state, meetingRoom.meetingRoomId),
   );
+  const [isHidden, setIsHidden] = useState(true);
 
   return (
     <BlockContainer>
@@ -26,14 +29,21 @@ export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
           <RoomStatus>свободно</RoomStatus>
         )}
       </TitleContainer>
-      {meetingIdsByRoom ? (
-        meetingIdsByRoom.map((meetingId, index) => (
-          <MeetingByRoom
-            meetingId={meetingId}
-            key={meetingId}
-            indexOfMeeting={index}
-          />
-        ))
+      {meetingIdsByRoom && meetingIdsByRoom.length > 0 ? (
+        <>
+          {meetingIdsByRoom.map((meetingId, index) => (
+            <MeetingByRoom
+              meetingId={meetingId}
+              key={meetingId}
+              indexOfMeeting={index}
+              amountOfMeetings={meetingIdsByRoom.length}
+              isHidden={isHidden}
+            />
+          ))}
+          <Button onClick={() => setIsHidden((prev) => !prev)}>
+            Посмотреть расписание
+          </Button>
+        </>
       ) : (
         <span>сосамба нету митингов</span>
       )}

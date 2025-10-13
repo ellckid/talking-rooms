@@ -1,5 +1,5 @@
 import { ConferenceRoom } from "../../components/ConferenceRoom/ConferenceRoom.tsx";
-import { AllMeetings } from "../../components/AllMeetings.tsx";
+import { AllMeetings } from "../../components/AllMeetings/AllMeetings.tsx";
 import { useEffect } from "react";
 import { fetchMeetings } from "../../redux/thunks.ts";
 import { useAppDispatch, useAppSelector } from "../../redux/store.ts";

@@ -1,9 +1,8 @@
 import styled from "@emotion/styled";
 
-export const TitleContainer = styled.div({
+export const ContentContainer = styled.div({
   display: "flex",
   flexDirection: "row",
   justifyContent: "space-between",
-  paddingBottom: "30px",
-  alignItems: "center",
+  padding: "14px 14px 14px 14px",
 });
