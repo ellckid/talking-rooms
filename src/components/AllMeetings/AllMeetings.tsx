@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../redux/store.ts";
 import { selectMeetingsIdsByRoom } from "../../redux/meetingsSlice.ts";
-import { Meeting } from "../Meeting.tsx";
+import { Meeting } from "../Meeting/Meeting.tsx";
 import { ContentContainer } from "./ContentContainer.tsx";
 import { AllMeetingsContainer } from "./AllMeetingsContainer.tsx";
 import { TitleContainer } from "./TitleContainer.tsx";

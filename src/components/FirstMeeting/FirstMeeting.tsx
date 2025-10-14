@@ -10,7 +10,7 @@ import { StatusTitle } from "./StatusTitle.tsx";
 import { MeetingTitle } from "./MeetingTitle.tsx";
 import { MeetingTime } from "./MeetingTime.tsx";
 import { getTimeRange } from "../../functions/getTimeRange.ts";
-import { MeetingOrganizer } from "./MeetingOrganizer.tsx";
+import { MeetingWho } from "./MeetingWho.tsx";
 import { AmountOfMeetingsTitle } from "./AmountOfMeetingsTitle.tsx";
 
 interface MeetingProps {
@@ -41,7 +41,7 @@ export const FirstMeeting = ({ meetingId, amountOfMeetings }: MeetingProps) => {
           {getTimeRange(meeting?.startDate, meeting?.endDate)}
         </MeetingTime>
         {meeting?.who ? (
-          <MeetingOrganizer>Организатор: {meeting.who}</MeetingOrganizer>
+          <MeetingWho>Организатор: {meeting.who}</MeetingWho>
         ) : (
           "Организатора нет"
         )}
