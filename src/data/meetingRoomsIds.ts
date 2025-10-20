@@ -1,8 +1,8 @@
 export const meetingRoomA = {
-  meetingRoomId: 14312107,
-  meetingRoomName: "Большая переговорка",
+  calendarId: 14312107 as const,
+  meetingRoomName: "Большая переговорка" as const,
 };
 export const meetingRoomB = {
-  meetingRoomId: 14312108,
-  meetingRoomName: "Малая переговорка",
+  calendarId: 14312108 as const,
+  meetingRoomName: "Малая переговорка" as const,
 };

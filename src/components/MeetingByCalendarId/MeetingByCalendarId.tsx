@@ -5,14 +5,12 @@ interface MeetingProps {
   meetingId: string;
   indexOfMeeting: number;
   amountOfMeetings: number;
-  isHidden: boolean;
 }
 
-export const MeetingByRoom = ({
+export const MeetingByCalendarId = ({
   meetingId,
   indexOfMeeting,
   amountOfMeetings,
-  isHidden,
 }: MeetingProps) => {
   return (
     <div>
@@ -22,11 +20,7 @@ export const MeetingByRoom = ({
           amountOfMeetings={amountOfMeetings}
         />
       ) : (
-        <TodayMeeting
-          meetingId={meetingId}
-          indexOfMeeting={indexOfMeeting}
-          isHidden={isHidden}
-        />
+        <TodayMeeting meetingId={meetingId} />
       )}
     </div>
   );

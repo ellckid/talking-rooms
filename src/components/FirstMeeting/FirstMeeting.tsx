@@ -1,6 +1,6 @@
 import { useAppSelector } from "../../redux/store.ts";
 import { selectMeetingById } from "../../redux/meetingsSlice.ts";
-import { useIsMeetingOngoingById } from "../../hooks/useIsMeetingOngoing.ts";
+import { useIsMeetingOngoingById } from "../../hooks/useIsMeetingOngoingById.ts";
 import { FirstMeetingContainer } from "./FirstMeetingContainer.tsx";
 import { StatusContainer } from "./StatusContainer.tsx";
 import { Image } from "./Image.tsx";

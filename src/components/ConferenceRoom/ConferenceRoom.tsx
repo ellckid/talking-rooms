@@ -1,21 +1,21 @@
 import { useAppSelector } from "../../redux/store.ts";
-import { selectNextTodayMeetingsIdsByRoom } from "../../redux/meetingsSlice.ts";
-import { MeetingByRoom } from "../MeetingByRoom/MeetingByRoom.tsx";
+import { selectNextTodayMeetingsIdsByCalendarId } from "../../redux/meetingsSlice.ts";
+import { MeetingByCalendarId } from "../MeetingByCalendarId/MeetingByCalendarId.tsx";
 import { BlockContainer } from "./BlockContainer.tsx";
 import { TitleContainer } from "./TitleContainer.tsx";
 import { Title } from "./Title.tsx";
-import { RoomStatus } from "./RoomStatus.tsx";
-import { useIsMeetingOngoingById } from "../../hooks/useIsMeetingOngoing.ts";
 import { Button } from "./Button.tsx";
 import { useState } from "react";
+import { VisibleMeetingsContainer } from "./VisibleMeetingsContainer.tsx";
+import { RoomStatus } from "../RoomStatus/RoomStatus.tsx";
 
 interface ConferenceRoomProps {
-  meetingRoom: { meetingRoomId: number; meetingRoomName: string };
+  meetingRoom: { calendarId: number; meetingRoomName: string };
 }
 
 export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
-  const meetingIdsByRoom = useAppSelector((state) =>
-    selectNextTodayMeetingsIdsByRoom(state, meetingRoom.meetingRoomId),
+  const meetingIdsByCalendarId = useAppSelector((state) =>
+    selectNextTodayMeetingsIdsByCalendarId(state, meetingRoom.calendarId),
   );
   const [isHidden, setIsHidden] = useState(true);
 
@@ -23,23 +23,20 @@ export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
     <BlockContainer>
       <TitleContainer>
         <Title>{meetingRoom.meetingRoomName}</Title>
-        {useIsMeetingOngoingById(meetingIdsByRoom![0]) ? (
-          <RoomStatus ongoing>занято</RoomStatus>
-        ) : (
-          <RoomStatus>свободно</RoomStatus>
-        )}
+        <RoomStatus meetingId={meetingIdsByCalendarId![0]} />
       </TitleContainer>
-      {meetingIdsByRoom && meetingIdsByRoom.length > 0 ? (
+      {meetingIdsByCalendarId && meetingIdsByCalendarId.length > 0 ? (
         <>
-          {meetingIdsByRoom.map((meetingId, index) => (
-            <MeetingByRoom
-              meetingId={meetingId}
-              key={meetingId}
-              indexOfMeeting={index}
-              amountOfMeetings={meetingIdsByRoom.length}
-              isHidden={isHidden}
-            />
-          ))}
+          <VisibleMeetingsContainer isHidden={isHidden}>
+            {meetingIdsByCalendarId.map((meetingId, index) => (
+              <MeetingByCalendarId
+                meetingId={meetingId}
+                key={meetingId}
+                indexOfMeeting={index}
+                amountOfMeetings={meetingIdsByCalendarId.length}
+              />
+            ))}
+          </VisibleMeetingsContainer>
           <Button onClick={() => setIsHidden((prev) => !prev)}>
             Посмотреть расписание
           </Button>

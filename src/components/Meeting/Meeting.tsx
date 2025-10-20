@@ -5,13 +5,14 @@ import { MeetingContainer } from "./MeetingContainer.tsx";
 import { ContentContainer } from "./ContentContainer.tsx";
 import { MeetingTitle } from "./MeetingTitle.tsx";
 import { MeetingStatus } from "./MeetingStatus.tsx";
-import { useGetStatusOfMeeting } from "../../hooks/useGetMeetingStatus.ts";
+import { useGetStatusOfMeeting } from "../../hooks/useMeetingStatus.ts";
 import { Image } from "./Image.tsx";
 import clock from "../../assets/grayClock.svg";
 import location from "../../assets/location.svg";
 import { TextContainer } from "./TextContainer.tsx";
 import { getMeetingRoomName } from "../../functions/getMeetingRoomName.tsx";
 import { MeetingWho } from "./MeetingWho.tsx";
+import { getColors } from "../../functions/getColors.ts";
 
 interface MeetingProps {
   meetingId: string;
@@ -30,7 +31,9 @@ export const Meeting = ({ meetingId }: MeetingProps) => {
         <MeetingTitle>
           {meeting?.title ? meeting.title : "Встреча"}
         </MeetingTitle>
-        <MeetingStatus status={meetingStatus}>{meetingStatus}</MeetingStatus>
+        <MeetingStatus {...getColors(meetingStatus)}>
+          {meetingStatus}
+        </MeetingStatus>
       </ContentContainer>
       <ContentContainer>
         <Image src={clock} alt={""}></Image>

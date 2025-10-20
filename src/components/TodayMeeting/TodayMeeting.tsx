@@ -10,21 +10,15 @@ import { getHoursTime } from "../../functions/getHoursTime.ts";
 
 interface TodayMeetingProps {
   meetingId: string;
-  indexOfMeeting: number;
-  isHidden: boolean;
 }
 
-export const TodayMeeting = ({
-  meetingId,
-  indexOfMeeting,
-  isHidden,
-}: TodayMeetingProps) => {
+export const TodayMeeting = ({ meetingId }: TodayMeetingProps) => {
   const meeting = useAppSelector((state) =>
     selectMeetingById(state, meetingId),
   );
 
   return (
-    <MeetingContainer hidden={indexOfMeeting >= 3 && isHidden}>
+    <MeetingContainer>
       <ContentContainer>
         <TextContainer>
           <MeetingName>

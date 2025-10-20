@@ -43,7 +43,7 @@ export const meetingsAdapterSelectors = meetingsAdapter.getSelectors(
   meetingsSelectors.meetings,
 );
 
-export const selectMeetingsIdsByRoom = createSelector(
+export const selectMeetingsIdsByCalendarId = createSelector(
   [
     meetingsAdapterSelectors.selectAll,
     (_, calenderId: number | null) => calenderId,
@@ -59,14 +59,7 @@ export const selectMeetingsIdsByRoom = createSelector(
   },
 );
 
-// export const selectAllIds = createSelector(
-//   [meetingsAdapterSelectors.selectIds],
-//   (meetingIds) => {
-//     return meetingIds;
-//   },
-// );
-
-export const selectNextTodayMeetingsIdsByRoom = createSelector(
+export const selectNextTodayMeetingsIdsByCalendarId = createSelector(
   [meetingsAdapterSelectors.selectAll, (_, calendarId: number) => calendarId],
   (meetings, calendarId) => {
     if (calendarId) {

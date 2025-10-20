@@ -1,5 +1,5 @@
 import { useAppSelector } from "../../redux/store.ts";
-import { selectMeetingsIdsByRoom } from "../../redux/meetingsSlice.ts";
+import { selectMeetingsIdsByCalendarId } from "../../redux/meetingsSlice.ts";
 import { Meeting } from "../Meeting/Meeting.tsx";
 import { ContentContainer } from "./ContentContainer.tsx";
 import { AllMeetingsContainer } from "./AllMeetingsContainer.tsx";
@@ -8,7 +8,7 @@ import { MeetingsContainer } from "./MeetingsContainer.tsx";
 
 export const AllMeetings = () => {
   const meetingIds = useAppSelector((state) =>
-    selectMeetingsIdsByRoom(state, null),
+    selectMeetingsIdsByCalendarId(state, null),
   );
 
   return (
