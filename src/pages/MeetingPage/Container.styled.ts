@@ -6,6 +6,7 @@ export const Container = styled.div({
   gap: "26px",
   justifyContent: "space-between",
   padding: "0 22px 0 22px",
+
   "@media (max-width: 700px)": {
     flexDirection: "column",
     gap: "16px",

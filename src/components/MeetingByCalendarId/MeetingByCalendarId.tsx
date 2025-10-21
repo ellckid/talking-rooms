@@ -1,7 +1,8 @@
 import { FirstMeeting } from "../FirstMeeting/FirstMeeting.tsx";
 import { TodayMeeting } from "../TodayMeeting/TodayMeeting.tsx";
+import { AmountOfMeetingsTitle } from "../FirstMeeting/AmountOfMeetingsTitle.tsx";
 
-interface MeetingProps {
+interface MeetingByCalendarIdProps {
   meetingId: string;
   indexOfMeeting: number;
   amountOfMeetings: number;
@@ -11,17 +12,20 @@ export const MeetingByCalendarId = ({
   meetingId,
   indexOfMeeting,
   amountOfMeetings,
-}: MeetingProps) => {
+}: MeetingByCalendarIdProps) => {
   return (
-    <div>
+    <>
+      {/* TODO: со звездочкой, можно на чистом css */}
       {indexOfMeeting === 0 ? (
-        <FirstMeeting
-          meetingId={meetingId}
-          amountOfMeetings={amountOfMeetings}
-        />
+        <>
+          <FirstMeeting meetingId={meetingId} />
+          <AmountOfMeetingsTitle>
+            Расписание на сегодня (Встреч: {amountOfMeetings})
+          </AmountOfMeetingsTitle>
+        </>
       ) : (
         <TodayMeeting meetingId={meetingId} />
       )}
-    </div>
+    </>
   );
 };

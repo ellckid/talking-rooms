@@ -11,14 +11,12 @@ import { MeetingTitle } from "./MeetingTitle.tsx";
 import { MeetingTime } from "./MeetingTime.tsx";
 import { getTimeRange } from "../../functions/getTimeRange.ts";
 import { MeetingWho } from "./MeetingWho.tsx";
-import { AmountOfMeetingsTitle } from "./AmountOfMeetingsTitle.tsx";
 
 interface MeetingProps {
   meetingId: string;
-  amountOfMeetings: number;
 }
 
-export const FirstMeeting = ({ meetingId, amountOfMeetings }: MeetingProps) => {
+export const FirstMeeting = ({ meetingId }: MeetingProps) => {
   const meeting = useAppSelector((state) =>
     selectMeetingById(state, meetingId),
   );
@@ -26,29 +24,23 @@ export const FirstMeeting = ({ meetingId, amountOfMeetings }: MeetingProps) => {
   const isOngoing = useIsMeetingOngoingById(meeting?.meetingId);
 
   return (
-    <div>
-      <FirstMeetingContainer ongoing={isOngoing}>
-        <StatusContainer>
-          <Image src={isOngoing ? clock : calendar} alt={"clock"} />
-          <StatusTitle ongoing={isOngoing}>
-            {isOngoing ? "Сейчас используется" : "Следующая встреча"}
-          </StatusTitle>
-        </StatusContainer>
-        <MeetingTitle>
-          {meeting?.title ? meeting.title : "Встреча"}
-        </MeetingTitle>
-        <MeetingTime>
-          {getTimeRange(meeting?.startDate, meeting?.endDate)}
-        </MeetingTime>
-        {meeting?.who ? (
-          <MeetingWho>Организатор: {meeting.who}</MeetingWho>
-        ) : (
-          "Организатора нет"
-        )}
-      </FirstMeetingContainer>
-      <AmountOfMeetingsTitle>
-        Расписание на сегодня (Встреч: {amountOfMeetings})
-      </AmountOfMeetingsTitle>
-    </div>
+    <FirstMeetingContainer ongoing={isOngoing}>
+      <StatusContainer>
+        <Image src={isOngoing ? clock : calendar} alt={"clock"} />
+        <StatusTitle ongoing={isOngoing}>
+          {/* TODO: * i18n */}
+          {isOngoing ? "Сейчас используется" : "Следующая встреча"}
+        </StatusTitle>
+      </StatusContainer>
+      <MeetingTitle>{meeting?.title ? meeting.title : "Встреча"}</MeetingTitle>
+      <MeetingTime>
+        {getTimeRange(meeting?.startDate, meeting?.endDate)}
+      </MeetingTime>
+      {meeting?.who ? (
+        <MeetingWho>Организатор: {meeting.who}</MeetingWho>
+      ) : (
+        "Организатора нет"
+      )}
+    </FirstMeetingContainer>
   );
 };

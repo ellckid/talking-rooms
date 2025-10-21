@@ -1,17 +1,17 @@
 import { ConferenceRoom } from "../../components/ConferenceRoom/ConferenceRoom.tsx";
 import { AllMeetings } from "../../components/AllMeetings/AllMeetings.tsx";
 import { useEffect } from "react";
-import { fetchMeetings } from "../../redux/thunks.ts";
+import { fetchMeetingsThunk } from "../../redux/thunks.ts";
 import { useAppDispatch } from "../../redux/store.ts";
 import { meetingRoomA, meetingRoomB } from "../../data/meetingRoomsIds.ts";
-import { Container } from "./Container.tsx";
+import { Container } from "./Container.styled.ts";
 import { Title } from "./Title.tsx";
 
 export const MeetingPage = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(fetchMeetings());
+    dispatch(fetchMeetingsThunk());
   }, [dispatch]);
 
   return (

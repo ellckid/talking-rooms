@@ -1,7 +1,6 @@
 import { useAppSelector } from "../../redux/store.ts";
 import { selectMeetingById } from "../../redux/meetingsSlice.ts";
 import { MeetingContainer } from "./MeetingContainer.tsx";
-import { ContentContainer } from "./ContentContainer.tsx";
 import { TextContainer } from "./TextContainer.tsx";
 import { MeetingName } from "./MeetingName.tsx";
 import { MeetingOrganizer } from "./MeetingOrganizer.tsx";
@@ -19,18 +18,14 @@ export const TodayMeeting = ({ meetingId }: TodayMeetingProps) => {
 
   return (
     <MeetingContainer>
-      <ContentContainer>
-        <TextContainer>
-          <MeetingName>
-            {meeting?.title ? meeting.title : "Встреча"}
-          </MeetingName>
-          <MeetingOrganizer>{meeting?.who}</MeetingOrganizer>
-        </TextContainer>
-        <TextContainer>
-          <MeetingTime>{getHoursTime(meeting?.startDate)}</MeetingTime>
-          <MeetingTime>{getHoursTime(meeting?.endDate)}</MeetingTime>
-        </TextContainer>
-      </ContentContainer>
+      <TextContainer>
+        <MeetingName>{meeting?.title ? meeting.title : "Встреча"}</MeetingName>
+        <MeetingOrganizer>{meeting?.who}</MeetingOrganizer>
+      </TextContainer>
+      <TextContainer>
+        <MeetingTime>{getHoursTime(meeting?.startDate)}</MeetingTime>
+        <MeetingTime>{getHoursTime(meeting?.endDate)}</MeetingTime>
+      </TextContainer>
     </MeetingContainer>
   );
 };

@@ -13,6 +13,7 @@ export const AllMeetings = () => {
 
   return (
     <AllMeetingsContainer>
+      {/* TODO: как будто одним*/}
       <ContentContainer>
         <TitleContainer>Все встречи</TitleContainer>
         <MeetingsContainer>

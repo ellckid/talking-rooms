@@ -1,7 +1,7 @@
 import { createSelector, createSlice, EntityState } from "@reduxjs/toolkit";
 import { meetingsAdapter } from "./adapters.ts";
 import { Meeting, MeetingId } from "./Meeting.ts";
-import { fetchMeetings } from "./thunks.ts";
+import { fetchMeetingsThunk } from "./thunks.ts";
 import { isFuture, isPast, isToday } from "date-fns";
 
 type StatusType = "error" | "loading" | "fulfilled";
@@ -17,18 +17,18 @@ const initialState: MeetingsState = {
 
 export const meetingsSlice = createSlice({
   name: "meetings",
-  initialState: initialState,
+  initialState,
   reducers: {},
   extraReducers: (builder) => {
     builder
-      .addCase(fetchMeetings.pending, (state) => {
+      .addCase(fetchMeetingsThunk.pending, (state) => {
         state.status = "loading";
       })
-      .addCase(fetchMeetings.fulfilled, (state, action) => {
+      .addCase(fetchMeetingsThunk.fulfilled, (state, action) => {
         meetingsAdapter.upsertMany(state.meetings, action.payload);
         state.status = "fulfilled";
       })
-      .addCase(fetchMeetings.rejected, (state) => {
+      .addCase(fetchMeetingsThunk.rejected, (state) => {
         state.status = "error";
       });
   },
@@ -46,16 +46,16 @@ export const meetingsAdapterSelectors = meetingsAdapter.getSelectors(
 export const selectMeetingsIdsByCalendarId = createSelector(
   [
     meetingsAdapterSelectors.selectAll,
-    (_, calenderId: number | null) => calenderId,
+    (_, calendarId: number | null) => calendarId,
   ],
   (meetings, calendarId) => {
-    if (calendarId) {
-      return meetings
-        .filter((meeting) => meeting.calendarId === calendarId)
-        .map((meeting) => meeting.meetingId);
-    }
+    const filteredMeetings = calendarId
+      ? meetings.filter((meeting) => meeting.calendarId === calendarId)
+      : meetings;
 
-    return meetings.map((meeting) => meeting.meetingId);
+    // TODO: array.reduce
+
+    return filteredMeetings.map((meeting) => meeting.meetingId);
   },
 );
 
@@ -66,6 +66,7 @@ export const selectNextTodayMeetingsIdsByCalendarId = createSelector(
       return meetings
         .filter(
           (meeting) =>
+            // TODO: в рулзы
             meeting.calendarId === calendarId &&
             isToday(meeting.startDate) &&
             (isFuture(meeting.startDate) ||

@@ -9,23 +9,35 @@ import { useState } from "react";
 import { VisibleMeetingsContainer } from "./VisibleMeetingsContainer.tsx";
 import { RoomStatus } from "../RoomStatus/RoomStatus.tsx";
 
-interface ConferenceRoomProps {
+interface ClassNameProps {
+  className?: string;
+}
+
+interface ConferenceRoomProps extends ClassNameProps {
   meetingRoom: { calendarId: number; meetingRoomName: string };
 }
 
-export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
+export const ConferenceRoom = ({
+  meetingRoom,
+  className,
+}: ConferenceRoomProps) => {
   const meetingIdsByCalendarId = useAppSelector((state) =>
     selectNextTodayMeetingsIdsByCalendarId(state, meetingRoom.calendarId),
   );
   const [isHidden, setIsHidden] = useState(true);
+  const isMeetingsExist =
+    meetingIdsByCalendarId && meetingIdsByCalendarId.length;
 
   return (
-    <BlockContainer>
+    <BlockContainer className={className}>
       <TitleContainer>
         <Title>{meetingRoom.meetingRoomName}</Title>
-        <RoomStatus meetingId={meetingIdsByCalendarId![0]} />
+        {meetingIdsByCalendarId && (
+          <RoomStatus meetingId={meetingIdsByCalendarId[0]} />
+        )}
       </TitleContainer>
-      {meetingIdsByCalendarId && meetingIdsByCalendarId.length > 0 ? (
+      {/* TODO: в отдельный компонент */}
+      {isMeetingsExist && (
         <>
           <VisibleMeetingsContainer isHidden={isHidden}>
             {meetingIdsByCalendarId.map((meetingId, index) => (
@@ -41,9 +53,8 @@ export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
             Посмотреть расписание
           </Button>
         </>
-      ) : (
-        <span>сосамба нету митингов</span>
       )}
+      {!isMeetingsExist && <span>сосамба нету митингов</span>}
     </BlockContainer>
   );
 };

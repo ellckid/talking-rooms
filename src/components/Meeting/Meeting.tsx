@@ -36,7 +36,8 @@ export const Meeting = ({ meetingId }: MeetingProps) => {
         </MeetingStatus>
       </ContentContainer>
       <ContentContainer>
-        <Image src={clock} alt={""}></Image>
+        {/* TODO: инлайн свг как реакт компонент */}
+        <Image src={clock} alt={""} />
         <TextContainer>
           {getTimeRange(meeting?.startDate, meeting?.endDate)}
         </TextContainer>

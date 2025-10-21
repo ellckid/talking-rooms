@@ -3,7 +3,9 @@ import { Dto } from "./dto.ts";
 
 const url = import.meta.env.VITE_REACT_APP_API_KEY;
 
-export const fetchMeetings = createAsyncThunk(
+// TODO: вынести апи в отдельный хелпер
+// TODO: типизировать то что возвращает санк (провалиться в санк и посмотреть какая у него сигнатура внутри )
+export const fetchMeetingsThunk = createAsyncThunk(
   "meetings/fetchMeetings",
   async () => {
     const response = await fetch(url);
