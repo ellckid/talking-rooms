@@ -2,8 +2,10 @@ import styled from "@emotion/styled";
 
 export const AllMeetingsContainer = styled.div({
   display: "flex",
-  // TODO: прочитать на доке что за шринк и тд
   flex: "1",
   flexDirection: "column",
-  padding: "26px 22px 26px 22px",
+  margin: "22px",
+  padding: "28px",
+  border: "1px solid #E8E8E8",
+  borderRadius: "16px",
 });

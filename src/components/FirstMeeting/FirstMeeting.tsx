@@ -1,6 +1,5 @@
 import { useAppSelector } from "../../redux/store.ts";
 import { selectMeetingById } from "../../redux/meetingsSlice.ts";
-import { useIsMeetingOngoingById } from "../../hooks/useIsMeetingOngoingById.ts";
 import { FirstMeetingContainer } from "./FirstMeetingContainer.tsx";
 import { StatusContainer } from "./StatusContainer.tsx";
 import { Image } from "./Image.tsx";
@@ -9,8 +8,8 @@ import calendar from "../../assets/calendar.svg";
 import { StatusTitle } from "./StatusTitle.tsx";
 import { MeetingTitle } from "./MeetingTitle.tsx";
 import { MeetingTime } from "./MeetingTime.tsx";
-import { getTimeRange } from "../../functions/getTimeRange.ts";
 import { MeetingWho } from "./MeetingWho.tsx";
+import { rules } from "../../rules/rules.ts";
 
 interface MeetingProps {
   meetingId: string;
@@ -21,7 +20,7 @@ export const FirstMeeting = ({ meetingId }: MeetingProps) => {
     selectMeetingById(state, meetingId),
   );
 
-  const isOngoing = useIsMeetingOngoingById(meeting?.meetingId);
+  const isOngoing = rules.isMeetingOngoing(meeting);
 
   return (
     <FirstMeetingContainer ongoing={isOngoing}>
@@ -34,7 +33,7 @@ export const FirstMeeting = ({ meetingId }: MeetingProps) => {
       </StatusContainer>
       <MeetingTitle>{meeting?.title ? meeting.title : "Встреча"}</MeetingTitle>
       <MeetingTime>
-        {getTimeRange(meeting?.startDate, meeting?.endDate)}
+        {rules.timeRange(meeting?.startDate, meeting?.endDate)}
       </MeetingTime>
       {meeting?.who ? (
         <MeetingWho>Организатор: {meeting.who}</MeetingWho>

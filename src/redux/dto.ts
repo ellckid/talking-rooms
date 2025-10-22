@@ -1,13 +1,13 @@
-export interface Dto {
-  body: Body;
+export interface MeetingsDto {
+  body: MeetingsBody;
 }
 
-interface Body {
-  events: Event[];
+interface MeetingsBody {
+  events: MeetingsEvent[];
   timestamp: number;
 }
 
-interface Event {
+interface MeetingsEvent {
   id: string;
   subcalendar_id: number;
   title: string;

@@ -15,17 +15,15 @@ export const MeetingByCalendarId = ({
 }: MeetingByCalendarIdProps) => {
   return (
     <>
-      {/* TODO: со звездочкой, можно на чистом css */}
-      {indexOfMeeting === 0 ? (
+      {indexOfMeeting === 0 && (
         <>
           <FirstMeeting meetingId={meetingId} />
           <AmountOfMeetingsTitle>
             Расписание на сегодня (Встреч: {amountOfMeetings})
           </AmountOfMeetingsTitle>
         </>
-      ) : (
-        <TodayMeeting meetingId={meetingId} />
       )}
+      {indexOfMeeting !== 0 && <TodayMeeting meetingId={meetingId} />}
     </>
   );
 };

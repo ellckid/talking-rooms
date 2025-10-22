@@ -5,7 +5,7 @@ import { TextContainer } from "./TextContainer.tsx";
 import { MeetingName } from "./MeetingName.tsx";
 import { MeetingOrganizer } from "./MeetingOrganizer.tsx";
 import { MeetingTime } from "./MeetingTime.tsx";
-import { getHoursTime } from "../../functions/getHoursTime.ts";
+import { rules } from "../../rules/rules.ts";
 
 interface TodayMeetingProps {
   meetingId: string;
@@ -23,8 +23,8 @@ export const TodayMeeting = ({ meetingId }: TodayMeetingProps) => {
         <MeetingOrganizer>{meeting?.who}</MeetingOrganizer>
       </TextContainer>
       <TextContainer>
-        <MeetingTime>{getHoursTime(meeting?.startDate)}</MeetingTime>
-        <MeetingTime>{getHoursTime(meeting?.endDate)}</MeetingTime>
+        <MeetingTime>{rules.hoursTime(meeting?.startDate)}</MeetingTime>
+        <MeetingTime>{rules.hoursTime(meeting?.endDate)}</MeetingTime>
       </TextContainer>
     </MeetingContainer>
   );
