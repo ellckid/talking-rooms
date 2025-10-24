@@ -4,7 +4,7 @@ interface RoomStatusProps {
   ongoing?: boolean;
 }
 
-export const RoomStatus = styled.h5((props: RoomStatusProps) => ({
+export const RoomStatusTitle = styled.h5((props: RoomStatusProps) => ({
   fontWeight: 400,
   margin: 0,
   padding: "4px 10px 4px 10px",

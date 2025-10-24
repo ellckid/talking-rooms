@@ -1,7 +1,7 @@
 import styled from "@emotion/styled";
 
-export const MeetingOrganizer = styled.h5({
+export const MeetingTime = styled.h6({
   margin: 0,
-  color: "#717182",
   fontWeight: 400,
+  color: "#717182",
 });
