@@ -1,7 +1,6 @@
 import { useState } from "react";
-import { VisibleMeetingsContainer } from "./VisibleMeetingsContainer.tsx";
 import { MeetingByCalendarId } from "../MeetingByCalendarId/MeetingByCalendarId.tsx";
-import { Button } from "./Button.tsx";
+import * as S from "./ConferenceRoomMeetings.styled.ts";
 
 interface ConferenceRoomMeetingsProps {
   meetingIdsByCalendarId: string[] | null;
@@ -18,7 +17,7 @@ export const ConferenceRoomMeetings = ({
     <>
       {isMeetingsExist && (
         <>
-          <VisibleMeetingsContainer isHidden={isHidden}>
+          <S.VisibleMeetingsContainer isHidden={isHidden}>
             {meetingIdsByCalendarId.map((meetingId, index) => (
               <MeetingByCalendarId
                 meetingId={meetingId}
@@ -27,10 +26,10 @@ export const ConferenceRoomMeetings = ({
                 amountOfMeetings={meetingIdsByCalendarId.length}
               />
             ))}
-          </VisibleMeetingsContainer>
-          <Button onClick={() => setIsHidden((prev) => !prev)}>
+          </S.VisibleMeetingsContainer>
+          <S.Button onClick={() => setIsHidden((prev) => !prev)}>
             Посмотреть расписание
-          </Button>
+          </S.Button>
         </>
       )}
       {!isMeetingsExist && <span>сосамба нету митингов</span>}

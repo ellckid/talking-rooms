@@ -1,6 +1,6 @@
 import { FirstMeeting } from "../FirstMeeting/FirstMeeting.tsx";
 import { TodayMeeting } from "../TodayMeeting/TodayMeeting.tsx";
-import { AmountOfMeetingsTitle } from "../FirstMeeting/AmountOfMeetingsTitle.tsx";
+import * as S from "./MeetingByCalendarId.styled.ts";
 
 interface MeetingByCalendarIdProps {
   meetingId: string;
@@ -18,9 +18,9 @@ export const MeetingByCalendarId = ({
       {indexOfMeeting === 0 && (
         <>
           <FirstMeeting meetingId={meetingId} />
-          <AmountOfMeetingsTitle>
+          <S.AmountOfMeetingsTitle>
             Расписание на сегодня (Встреч: {amountOfMeetings})
-          </AmountOfMeetingsTitle>
+          </S.AmountOfMeetingsTitle>
         </>
       )}
       {indexOfMeeting !== 0 && <TodayMeeting meetingId={meetingId} />}

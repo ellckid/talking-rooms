@@ -1,5 +1,6 @@
 import { MeetingPage } from "./pages/MeetingPage/MeetingPage.tsx";
-import { css, Global } from "@emotion/react";
+import { css, Global, ThemeProvider } from "@emotion/react";
+import { theme } from "./theme/theme.ts";
 
 // TODO: попробовать в темизацию ThemeProvider
 const GlobalStyles = () => {
@@ -21,10 +22,10 @@ const GlobalStyles = () => {
 
 const App = () => {
   return (
-    <>
+    <ThemeProvider theme={theme}>
       <GlobalStyles />
       <MeetingPage />;
-    </>
+    </ThemeProvider>
   );
 };
 

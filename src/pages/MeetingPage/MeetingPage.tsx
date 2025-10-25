@@ -3,9 +3,8 @@ import { AllMeetings } from "../../components/AllMeetings/AllMeetings.tsx";
 import { useEffect } from "react";
 import { useAppDispatch } from "../../redux/store.ts";
 import { meetingRoomA, meetingRoomB } from "../../data/meetingRoomsIds.ts";
-import { Container } from "./Container.styled.ts";
-import { Title } from "./Title.tsx";
 import { api } from "../../api/api.ts";
+import * as S from "./MeetingPage.styled.ts";
 
 export const MeetingPage = () => {
   const dispatch = useAppDispatch();
@@ -16,11 +15,11 @@ export const MeetingPage = () => {
 
   return (
     <div>
-      <Title>Переговорки</Title>
-      <Container>
+      <S.Title>Переговорки</S.Title>
+      <S.Container>
         <ConferenceRoom meetingRoom={meetingRoomA} />
         <ConferenceRoom meetingRoom={meetingRoomB} />
-      </Container>
+      </S.Container>
       <AllMeetings />
     </div>
   );

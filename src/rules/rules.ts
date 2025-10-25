@@ -1,6 +1,7 @@
 import { DateString, Meeting } from "../redux/Meeting.ts";
 import {
   format,
+  getDay,
   isFuture,
   isPast,
   isToday,
@@ -105,6 +106,29 @@ const statusColors = (meetingStatus: MeetingStatus) => {
   }
 };
 
+const getDayOfTheWeek = (date: DateString | undefined) => {
+  if (date) {
+    const dayOfTheWeek = getDay(date);
+
+    switch (dayOfTheWeek) {
+      case 1:
+        return "пн.";
+      case 2:
+        return "вт.";
+      case 3:
+        return "ср.";
+      case 4:
+        return "чт.";
+      case 5:
+        return "пт.";
+      case 6:
+        return "сб.";
+      case 7:
+        return "вс. ";
+    }
+  }
+};
+
 export const rules = {
   isTodayNextMeeting,
   isMeetingOngoing,
@@ -113,4 +137,5 @@ export const rules = {
   meetingStatus,
   statusName,
   statusColors,
+  getDayOfTheWeek,
 };

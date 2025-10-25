@@ -67,7 +67,7 @@ export const selectMeetingsIdsByFilter = createSelector(
       const meetingIds: MeetingId[] = [];
 
       meetings.forEach((meeting) => {
-        if (rules.isMeetingOngoing(meeting) || isFuture(meeting.endDate)) {
+        if (rules.isMeetingOngoing(meeting) || isFuture(meeting.startDate)) {
           meetingIds.push(meeting.meetingId);
         }
       });

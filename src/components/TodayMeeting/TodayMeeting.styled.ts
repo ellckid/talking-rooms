@@ -2,6 +2,7 @@ import styled from "@emotion/styled";
 
 export const MeetingContainer = styled.div({
   display: "flex",
+  minHeight: "40px",
   justifyContent: "space-between",
   alignItems: "center",
   backgroundColor: "#F9FAFC",
@@ -10,7 +11,10 @@ export const MeetingContainer = styled.div({
   padding: "14px 14px 14px 14px",
   marginBottom: "6px",
 });
-// display: "flex",
-//   flexDirection: "row",
-//   justifyContent: "space-between",
-//   padding: "14px 14px 14px 14px",
+
+export const TextContainer = styled.div({
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "space-between",
+  gap: "8px",
+});

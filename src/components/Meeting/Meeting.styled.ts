@@ -1,14 +1,5 @@
 import styled from "@emotion/styled";
 
-export const MeetingContainer = styled.div({
-  display: "flex",
-  flexDirection: "column",
-  padding: "14px",
-  gap: "8px",
-  border: "1px solid #EAEAEA",
-  borderRadius: "10px",
-});
-
 interface MeetingStatusProps {
   color: string;
   fontColor: string;
@@ -25,9 +16,18 @@ export const MeetingStatus = styled.h5<MeetingStatusProps>((props) => ({
   fontWeight: 400,
 }));
 
-export const MeetingTitle = styled.h5({
-  margin: 0,
-  color: "#0A0A0A",
-  fontWeight: 400,
-  fontSize: "0.94em",
+export const ContentContainer = styled.div({
+  display: "flex",
+  flexDirection: "row",
+  gap: "8px",
+  alignItems: "center",
+});
+
+export const Image = styled.img({
+  width: "14px",
+  height: "14px",
+});
+
+export const MeetingTime = styled.h5({
+  paddingRight: "8px",
 });

@@ -1,36 +1,30 @@
 import { useAppSelector } from "../../redux/store.ts";
 import { selectNextTodayMeetingsIdsByCalendarId } from "../../redux/meetingsSlice.ts";
-import { BlockContainer } from "./BlockContainer.tsx";
-import { TitleContainer } from "./TitleContainer.tsx";
-import { Title } from "./Title.tsx";
 import { RoomStatus } from "../RoomStatus/RoomStatus.tsx";
 import { ConferenceRoomMeetings } from "../ConferenceRoomMeetings/ConferenceRoomMeetings.tsx";
+import { useTheme } from "@emotion/react";
+import { MyTheme } from "../../theme/theme.ts";
+import * as S from "./ConferenceRoom.styled.ts";
 
-interface ClassNameProps {
-  className?: string;
-}
-
-interface ConferenceRoomProps extends ClassNameProps {
+interface ConferenceRoomProps {
   meetingRoom: { calendarId: number; meetingRoomName: string };
 }
 
-export const ConferenceRoom = ({
-  meetingRoom,
-  className,
-}: ConferenceRoomProps) => {
+export const ConferenceRoom = ({ meetingRoom }: ConferenceRoomProps) => {
+  const theme: MyTheme = useTheme();
   const meetingIdsByCalendarId = useAppSelector((state) =>
     selectNextTodayMeetingsIdsByCalendarId(state, meetingRoom.calendarId),
   );
 
   return (
-    <BlockContainer className={className}>
-      <TitleContainer>
-        <Title>{meetingRoom.meetingRoomName}</Title>
+    <div style={theme.mainContainer}>
+      <S.TitleContainer>
+        <S.Title>{meetingRoom.meetingRoomName}</S.Title>
         {meetingIdsByCalendarId && (
           <RoomStatus meetingId={meetingIdsByCalendarId[0]} />
         )}
-      </TitleContainer>
+      </S.TitleContainer>
       <ConferenceRoomMeetings meetingIdsByCalendarId={meetingIdsByCalendarId} />
-    </BlockContainer>
+    </div>
   );
 };
